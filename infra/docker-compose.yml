@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: ohjaus
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: ../apps/api
+    environment:
+      DATABASE_URL: postgresql+psycopg://app:app@db:5432/ohjaus
+      JWT_SECRET: dev-secret-change-me
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  engine:
+    build: ../apps/engine
+    environment:
+      DATABASE_URL: postgresql+psycopg://app:app@db:5432/ohjaus
+    depends_on:
+      - db
+
+  web:
+    build: ../apps/web
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
