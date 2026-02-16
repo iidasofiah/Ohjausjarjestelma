@@ -1,0 +1,16 @@
+# Palaveri: <päivämäärä>
+
+## Paikalla
+- ...
+
+## Tavoite
+- ...
+
+## Päätökset
+- ...
+
+## Auki olevat kysymykset
+- ...
+
+## Seuraavat tehtävät
+- [ ] ...
